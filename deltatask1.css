@@ -1,0 +1,102 @@
+#buttons{
+	height:5%;
+	width:40%;
+	align:center;
+	display:block;
+	background-color:yellow;
+	margin-left:30%;
+	margin-top:2.5%;
+	text-align:center;
+	valign:middle;
+}
+#header{
+	height:15%;
+	width:80%;
+	align:center;
+	display:block;
+	background-color:cyan;
+	border:4px white dashed;
+	border-radius:4%;
+	margin-left:10%;
+	margin-top:3%;
+}
+#footer{
+	height:5%;
+	width:40%;
+	align:center;
+	display:block;
+	
+	margin-left:30%;
+	margin-top:2.5%;
+	text-align:center;
+}
+.countdown{
+	height:100%;
+	width:100%;
+	display:inline-block;
+	border:5px solid black;
+	border-radius:5%;
+	background-color:pink;
+	align:center;
+	vertical-align:middle;
+}
+.Day{
+	height:50px;
+	width:50px;
+	display:inline-block;
+	border:2px solid red;
+	border-radius:3%
+	background-color:cyan;
+	text-align:center;
+	valign:middle;
+	margin-left:520px;
+	margin-top:150px;
+}
+.Hour{
+
+	height:50px;
+	width:50px;
+	display:inline-block;
+	border:2px solid red;
+	border-radius:3%
+	background-color:cyan;
+	text-align:center;
+	valign:middle;
+	margin-top:150px;
+}
+.Min{
+
+	height:50px;
+	width:50px;
+	display:inline-block;
+	border:2px solid red;
+	border-radius:3%
+	background-color:cyan;
+	text-align:center;
+	valign:middle;
+	margin-top:150px;
+}
+.Sec{
+
+	height:50px;
+	width:50px;
+	display:inline-block;
+	border:2px solid red;
+	border-radius:3%
+	background-color:cyan;
+	text-align:center;
+	valign:middle;
+	margin-top:150px;
+}
+#days{
+	margin-top:0;
+}
+#hours{
+	margin-top:0;
+}
+#minutes{
+	margin-top:0;
+}
+#seconds{
+	margin-top:0;
+}
