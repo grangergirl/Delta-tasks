@@ -1,0 +1,108 @@
+<html>
+	<head>
+	<title>Count down timer</title>
+	<link rel="stylesheet" href="deltatask1.css" type="text/css"/>
+	
+	<script type="text/javascript">
+	
+		function getdest()
+		{
+                clearInterval(timer);
+                count=1;
+		document.getElementById("footer").innerHTML="   ";
+		dest=new Date(prompt("Enter a valid date and time for example: January 1,2017 00:01:00","January 1, 2017 00:01:00"));
+		timer= setInterval("countDown()",1000);
+		}
+		function countDown()
+		{
+
+		var display="Count down completed";
+		var now=new Date();
+		var diff=dest.getTime()-now.getTime();
+		if(diff>=0)
+		{
+				
+		var seconds=Math.floor(diff/1000);
+		var minutes=Math.floor(seconds/60);
+		var hours=Math.floor(minutes/60);
+		var days=Math.floor(hours/24);
+		hours%=24;
+		minutes%=60;
+		seconds%=60;
+
+		document.getElementById("days").innerHTML=days;
+		document.getElementById("hours").innerHTML=hours;
+		document.getElementById("minutes").innerHTML=minutes;
+		document.getElementById("seconds").innerHTML=seconds;
+		}
+		else{
+		document.getElementById("footer").innerHTML="Countdown Completed!";
+		diff=-diff;
+		var seconds=Math.floor(diff/1000);
+		var minutes=Math.floor(seconds/60);
+		var hours=Math.floor(minutes/60);
+		var days=Math.floor(hours/24);
+		hours%=24;
+		minutes%=60;
+		seconds%=60;
+		document.getElementById("days").style.color="#ff0000";
+		document.getElementById("days").innerHTML=days;
+
+		document.getElementById("hours").style.color="#ff0000";
+		document.getElementById("hours").innerHTML=hours;
+
+		document.getElementById("minutes").style.color="#ff0000";
+		document.getElementById("minutes").innerHTML=minutes;
+
+		document.getElementById("seconds").style.color="#ff0000";
+		document.getElementById("seconds").innerHTML=seconds;
+		
+		}
+		
+
+
+		}
+                
+                function pauser(){
+                   if((count%2)!=0)
+                        {
+                          
+                          document.getElementById("pause").innerHTML="Resume";
+                          clearInterval(timer);
+                          count++;
+                       }
+                   else{
+                        document.getElementById("pause").innerHTML="Pause";
+                        timer=setInterval('countDown()',1000);
+                        count++;
+                     }
+                }
+	</script>
+	</head>
+	<body>
+		<div class="countdown" >
+			<div id="header">
+			<h1 style="text-align:center; valign:middle font-color: white">Countdown Timer</h1>
+			</div>
+			<div class="Day" ><p style="text-align:center; valign:center">Days</p></div>
+			<div class="Hour" ><p style="text-align:center; valign:center">Hours</p></div>
+			<div class="Min" ><p style="text-align:center; valign:center">Mins</p></div>
+			<div class="Sec" ><p style="text-align:center; valign:center">Secs</p></div>
+			<div class="Day" id="days" ></div>
+			<div class="Hour" id="hours"></div>
+			<div class="Min"  id="minutes"></div>
+			<div class="Sec" id="seconds"></div>
+			<div id="buttons">
+				<button style="text-align:center; valign="middle" type="button" onclick="getdest()" >Start</button>
+				<button style="text-align:center; valign="middle" type="button" id="pause" autofocus onclick="pauser()">Pause</button>
+				<button style="text-align:center; valign="middle" type="reset" onclick="getdest()">Reset</button>
+			</div>
+			<div id="footer"></div>
+		</div>
+		<script type="text/javascript">
+			var dest,count=1;
+                        var timer;
+			
+		</script>
+	</body>
+</html>
