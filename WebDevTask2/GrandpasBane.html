@@ -1,0 +1,161 @@
+<html>
+<head>
+	<title>Grandpa's Bane</title>
+	<style type="text/css">
+		#game{
+			height:600px;
+			width:1600px;
+			overflow:hidden;
+			}
+		#scoreboard{
+			height:600px;
+			position:relative;
+			margin:0px auto;
+			background:#336699;
+			display:inline-block;
+			font-color:white;
+			}
+		#nightsky{
+			position:relative;
+			background:url(night.jpg) repeat-x;
+			width:1000px;
+			height:600px;
+			//-webkit-animation:nightmove linear 5s infinite;
+			//animation:nightmove linear 8s infinite;
+			}
+		@-webkit-keyframes nightmove{
+		from{background-position:0px;}
+		to{background-position:1256px;}
+		}
+		keyframes nightmove{
+		from{background-position:0px;}
+		to{background-position:1256px;}
+		}
+		#ball{
+			background:url(ball1.png);
+			width:45px;
+			height:45px;
+			position:relative;
+			top:400px;
+			left:0px;
+			-webkit-animation: rollball 1s steps(8) infinite;
+			animation: rollball 1s steps(8) infinite;
+			//-webkit-animation: translateball 10s linear infinite;
+			//animation: translateball 10s linear infinite;
+		}
+		@-webkit-keyframes rollball{
+		from{background-position:0px;}
+		to{background-position:-360px;}
+		}
+		@keyframes walking{
+		from{background-position:0px;}
+		to{background-position:-360px;}
+		}
+		@-webkit-keyframes translateball{
+		from{left:0px;}
+		to{left:955px;}
+		}
+		@keyframes translateball{
+		from{left:0px;}
+		to{left:955px;}
+		}
+		#grandpa{
+			background:url(man.png);
+			width:120px;
+			height:180px;
+			position:absolute;
+			top:250px;
+			left:880px;
+			//-webkit-animation:jumping 0.5s linear 20;
+			//animation:jumping 0.5s linear 20;
+			//-webkit-animation: walking 0.5s steps(8) infinite;
+			//animation: walking 0.5s steps(8) infinite;
+
+		}
+		@-webkit-keyframes walking{
+		from{background-position:0px;}
+		to{background-position:960px;}
+		}
+		@keyframes walking{
+		from{background-position:0px;}
+		to{background-position:960px;}
+		}
+		@-webkit-keyframes jumping{
+		0%{top:250px;}
+		25%{top:200px;}
+		50%{top:150px;}
+		75%{top:200px;}
+		100%{top:250px;}
+		}
+		@keyframes jumping{
+		0%{top:250px;}
+		25%{top:200px;}
+		50%{top:150px;}
+		75%{top:200px;}
+		100%{top:250px;}
+		}
+	</style>
+<script type="application/javascript" language="javascript">
+	/*function eval()
+	{
+	if(grandpa.style.top>="230px")&&((ball.style.left>="890px")&&(ball.style.left<="945px"))
+	{
+		//GAME OVER
+		scoreboard.innerHTML="Score is "+score+" and the game is over";
+	}
+	else if(ball.style.left=="955px")
+	{
+		score++;
+		scoreboard.innerHTML="Score is "+score;
+	}
+	else
+	{
+		;
+	}
+	}*/
+	function anim()
+	{
+		if(count==0)
+		{
+		ball.style.animation="translateball 10s linear infinite";
+		nightsky.style.animation="nightmove linear 8s infinite";
+		}
+		if(count%2==0)
+		{
+		grandpa.style.animation="walking 1s steps(8) infinite";count++;
+		}
+		else
+		{
+		grandpa.style.animation="jumping 1s linear 1";count++;
+		}
+	//while(!(document.onkeydown))	
+	//eval();
+	}
+	
+
+	</script>
+	
+</head>
+<body>
+	<div id="game"  style="display:inline-block">
+		<div id="nightsky" style="display:inline-block">
+			<div id="ball" style="display:inline-block" ></div>
+			<div id="grandpa" style="display:inline-block"></div>
+		</div>
+		<div id="scoreboard" style="display:inline-block">
+		<h1 >SCORE BOARD</h1>
+		</div>
+	</div>
+<script type="application/javascript" language="javascript">
+	var grandpa=document.getElementById("grandpa");
+	var nightsky=document.getElementById("nightsky");
+	var ball=document.getElementById("ball");
+	var scoreboard=document.getElementById("scoreboard");
+	var count=0;
+	var score=0;
+	document.onkeydown=anim;
+
+	</script>
+
+</body>
+</html>
