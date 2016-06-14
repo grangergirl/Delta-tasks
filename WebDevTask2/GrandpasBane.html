@@ -5,23 +5,71 @@
 		#game{
 			height:600px;
 			width:1600px;
+			display:inline-block;
 			overflow:hidden;
+			
 			}
-		#scoreboard{
-			height:600px;
+		#header{
+			height:8%;
+			width:1250px;
+			font-size:30px;
+			text-align:center;
+			margin-left:0px;
+			display:block;
 			position:relative;
+			background:yellow;	
+			padding-top:2%;
+			font-family:Castellar;
+			}
+		#footer{
+			height:6%;
+			width:1250px;
+			font-size:20px;
+			text-align:center;
+			margin-left:0px;
+			display:block;
+			position:relative;
+			background:green;	
+			padding-top:1%;
+			font-family:Candara;
+			}
+
+		#scoreboard{
+			display:inline-block;
+			height:600px;
+			width:250px;
+			position:absolute;
 			margin:0px auto;
 			background:#336699;
-			display:inline-block;
 			font-color:white;
 			}
+		#points{
+			height:20%;
+			width:80%;
+			font-size:30px;
+			text-align:center;
+			margin-left:10%;
+			margin-top:40%;
+			position:relative;
+			padding-top:35%;
+			}
+		#instructions{
+			height:text-wrap;
+			width:80%;
+			font-size:25px;
+			text-align:center;
+			margin-left:10%;
+			margin-top:10%;
+			position:relative;
+			background:cyan;			
+			}
 		#nightsky{
+			display:inline-block;
 			position:relative;
 			background:url(night.jpg) repeat-x;
 			width:1000px;
 			height:600px;
-			//-webkit-animation:nightmove linear 5s infinite;
-			//animation:nightmove linear 8s infinite;
+			margin-left:0px;
 			}
 		@-webkit-keyframes nightmove{
 		from{background-position:0px;}
@@ -31,32 +79,56 @@
 		from{background-position:0px;}
 		to{background-position:1256px;}
 		}
-		#ball{
-			background:url(ball1.png);
+		.ball{
 			width:45px;
 			height:45px;
 			position:relative;
-			top:400px;
+			top:385px;
+			}
+		#ball1{
+			background:url(ball1.png);
 			left:0px;
 			-webkit-animation: rollball 1s steps(8) infinite;
 			animation: rollball 1s steps(8) infinite;
-			//-webkit-animation: translateball 10s linear infinite;
-			//animation: translateball 10s linear infinite;
-		}
+			}
+		#ball2{
+			background:url(ball1.png);
+			left:-400px;
+			}
+			#ball3{
+			background:url(ball1.png);
+			left:-200px;
+			}
 		@-webkit-keyframes rollball{
 		from{background-position:0px;}
 		to{background-position:-360px;}
 		}
-		@keyframes walking{
+		@keyframes rollball{
 		from{background-position:0px;}
 		to{background-position:-360px;}
 		}
 		@-webkit-keyframes translateball{
-		from{left:0px;}
+		from{left:-45px;}
 		to{left:955px;}
 		}
 		@keyframes translateball{
-		from{left:0px;}
+		from{left:-45px;}
+		to{left:955px;}
+		}
+		@-webkit-keyframes moveball{
+		from{left:-400px;}
+		to{left:955px;}
+		}
+		@keyframes moveball{
+		from{left:-400px;}
+		to{left:955px;}
+		}
+		@-webkit-keyframes pushball{
+		from{left:-200px;}
+		to{left:955px;}
+		}
+		@keyframes pushball{
+		from{left:-200px;}
 		to{left:955px;}
 		}
 		#grandpa{
@@ -65,13 +137,8 @@
 			height:180px;
 			position:absolute;
 			top:250px;
-			left:880px;
-			//-webkit-animation:jumping 0.5s linear 20;
-			//animation:jumping 0.5s linear 20;
-			//-webkit-animation: walking 0.5s steps(8) infinite;
-			//animation: walking 0.5s steps(8) infinite;
-
-		}
+			left:800px;
+			}
 		@-webkit-keyframes walking{
 		from{background-position:0px;}
 		to{background-position:960px;}
@@ -94,42 +161,193 @@
 		75%{top:200px;}
 		100%{top:250px;}
 		}
+		@-webkit-keyframes levitating{
+		0%{top:230px;}
+		25%{top:190px;}
+		50%{top:150px;}
+		75%{top:190px;}
+		100%{top:230px;}
+		}
+		@keyframes levitating{
+		0%{top:250px;}
+		25%{top:200px;}
+		50%{top:150px;}
+		75%{top:200px;}
+		100%{top:250px;}
+		}
 	</style>
-<script type="application/javascript" language="javascript">
-	/*function eval()
+	<script type="application/javascript" language="javascript">
+	function getCssProperty(elmId, property)
 	{
-	if(grandpa.style.top>="230px")&&((ball.style.left>="890px")&&(ball.style.left<="945px"))
-	{
-		//GAME OVER
-		scoreboard.innerHTML="Score is "+score+" and the game is over";
+   		var elem = document.getElementById(elmId);
+   		return window.getComputedStyle(elem,null).getPropertyValue(property);
 	}
-	else if(ball.style.left=="955px")
+	function sound(src) 
 	{
-		score++;
-		scoreboard.innerHTML="Score is "+score;
+    		this.sound = document.createElement("audio");
+    		this.sound.src = src;
+    		this.sound.setAttribute("preload", "auto");
+    		this.sound.setAttribute("controls", "none");
+		this.sound.setAttribute("loop","yes");
+    		this.sound.style.display = "none";
+    		document.body.appendChild(this.sound);
+   		this.play = function(){
+        		this.sound.play();
+    			}
+    		this.stop = function(){
+       			 this.sound.pause();
+    			}
+		this.resume=function(){
+			this.sound.resume();
+			}
 	}
-	else
+	function eval()
 	{
-		;
+	 gTop = getCssProperty("grandpa", "top");
+	 bLeft1 = getCssProperty("ball1", "left");
+	 bLeft2 = getCssProperty("ball2", "left");
+	 bLeft3 = getCssProperty("ball3", "left");
+
+	
+	if(gTop>="205px")
+	{
+		if((bLeft1>="820.0px")&&(bLeft1<="840.0px"))
+		{
+			document.getElementById("nightsky").style.backgroundImage = "url('gameover.jpg')";
+			grandpa.style.animation="none";
+			nightsky.style.animation="none";
+			ball1.style.animation="rollball 1s steps(8) infinite";
+			ball2.style.animation="rollball 1s steps(8) infinite";
+			ball3.style.animation="rollball 1s steps(8) infinite";
+			scoreboard.innerHTML="Score:  "+score;
+			document.getElementById("instructions").innerHTML = "You let Grandpa slip over and fall! Reload page to play again and Save grandpa this time :)";
+		}
+		if((bLeft2>="820.0px")&&(bLeft2<="840.0px"))
+		{
+			document.getElementById("nightsky").style.backgroundImage = "url('gameover.jpg')";
+			grandpa.style.animation="none";
+			nightsky.style.animation="none";
+			ball1.style.animation="rollball 1s steps(8) infinite";
+			ball2.style.animation="rollball 1s steps(8) infinite";
+			ball3.style.animation="rollball 1s steps(8) infinite";
+			scoreboard.innerHTML="Score:  "+score;
+			document.getElementById("instructions").innerHTML = "You let Grandpa slip over and fall! Reload page to play again and Save grandpa this time :)";
+		
+		}
+		if((bLeft3>="820.0px")&&(bLeft3<="840.0px"))
+		{
+			document.getElementById("nightsky").style.backgroundImage = "url('gameover.jpg')";
+			grandpa.style.animation="none";
+			nightsky.style.animation="none";
+			ball1.style.animation="rollball 1s steps(8) infinite";
+			ball2.style.animation="rollball 1s steps(8) infinite";
+			ball3.style.animation="rollball 1s steps(8) infinite";
+			scoreboard.innerHTML="Score:  "+score;
+			document.getElementById("instructions").innerHTML = "You let Grandpa slip over and fall! Reload page to play again and Save grandpa this time :)";
+		
+		}
 	}
-	}*/
-	function anim()
+	
+	if((bLeft1>="949.0px")&&(bLeft1<="955.0px"))
 	{
+		if(flag1==0)
+		{
+			flag1=1;
+			score++;
+			scoreboard.innerHTML="Score: "+score;
+		}
+	}
+		else
+		flag1=0;
+	
+	if((bLeft2>="949.0px")&&(bLeft2<="955.0px"))
+	{
+		if(flag2==0)
+		{
+			flag2=1;
+			score++;
+			scoreboard.innerHTML="Score: "+score;
+		}
+	}
+		else
+		flag2=0;
+	
+	if((bLeft3>="949.0px")&&(bLeft3<="955.0px"))
+	{
+		if(flag3==0)
+		{
+			flag3=1;
+			score++;
+			scoreboard.innerHTML="Score: "+score;
+		}
+	}
+		else
+		flag3=0;
+	
+//scoreboard.innerHTML="Score: "+gTop;
+clearTimeout(timer);
+//if(flag==0)
+timer=setTimeout("eval()",40);	
+	}
+	function anim(e)
+	{
+	clearTimeout(timer);
+	bLeft1 = getCssProperty("ball1", "left");
+	bLeft2 = getCssProperty("ball2", "left");
+	
+
 		if(count==0)
 		{
-		ball.style.animation="translateball 10s linear infinite";
-		nightsky.style.animation="nightmove linear 8s infinite";
+		var r1=Math.floor(Math.random()*4);
+		var r2=Math.floor(Math.random()*4);
+		ball1.style.animation="translateball 8s linear infinite";
+			if(r1==0)
+				ball2.style.animation="moveball 4s linear infinite";
+			else if(r1==1)
+				ball2.style.animation="moveball 6s linear infinite";
+			else if(r1==2)
+				ball2.style.animation="moveball 10s linear infinite";
+			else
+				ball2.style.animation="moveball 12s linear infinite";
+			if(r2==0)
+				ball3.style.animation="pushball 4s linear infinite";
+			else if(r2==1)
+				ball3.style.animation="pushball 6s linear infinite";
+			else if(r2==2)
+				ball3.style.animation="pushball 10s linear infinite";
+			else
+				ball3.style.animation="pushball 12s linear infinite";
+		nightsky.style.animation="nightmove linear 9s infinite";		
+		aud.play();
 		}
-		if(count%2==0)
+		if(e.keyCode==38)
 		{
-		grandpa.style.animation="walking 1s steps(8) infinite";count++;
+		if(jumpCount%2==0)
+		{
+		jumpCount++;
+		grandpa.style.animation="jumping 1.5s linear 1";
 		}
 		else
 		{
-		grandpa.style.animation="jumping 1s linear 1";count++;
+		jumpCount++;
+		grandpa.style.animation="levitating 0.75s linear 1"; 
 		}
-	//while(!(document.onkeydown))	
-	//eval();
+		//aud.stop();	
+		jump.play();
+		
+		count++;
+		}
+		else
+		{
+		grandpa.style.animation="walking 1s steps(8) infinite";
+		jump.stop();
+		aud.play();
+		
+		count++;
+		}
+		
+	eval();
+	
 	}
 	
 
@@ -137,23 +355,43 @@
 	
 </head>
 <body>
-	<div id="game"  style="display:inline-block">
+	<div>
+	<div id="header" style="color:red"><b>GRANDPA'S BANE</b></div>
+	<div id="game" style="display:inline-block">
+		
 		<div id="nightsky" style="display:inline-block">
-			<div id="ball" style="display:inline-block" ></div>
+			<div class="ball" id="ball1" style="display:inline-block" ></div>
+			<div class="ball" id="ball2" style="display:inline-block" ></div>
+			<div class="ball" id="ball3" style="display:inline-block" ></div>
 			<div id="grandpa" style="display:inline-block"></div>
 		</div>
-		<div id="scoreboard" style="display:inline-block">
-		<h1 >SCORE BOARD</h1>
+		<div id="scoreboard" >		
+		<div><center><h1 >SCORE BOARD</h1></center></div>
+		<div id="points" style="background:cyan"><center>Score: 0</center></div>
+		<div id="instructions"></div>
 		</div>
+	</div>	
+	<div id="footer" style="color:yellow">Use enter key to help Grandpa jump (with low and high speeds alternatively) and any other key to help him walk. Take good care of Grandpa :)</div>
 	</div>
+	
 <script type="application/javascript" language="javascript">
 	var grandpa=document.getElementById("grandpa");
 	var nightsky=document.getElementById("nightsky");
 	var ball=document.getElementById("ball");
-	var scoreboard=document.getElementById("scoreboard");
+	var scoreboard=document.getElementById("points");
 	var count=0;
 	var score=0;
+	var aud=new sound("journey.mp3");
+	var jump=new sound("jump.ogg");
+	var gTop;
+	var bLeft1,bLeft2,bLeft3;
+	var timer;
+	var flag1=0,flag2=0,flag3=0;
+	var jumpCount=0;
 	document.onkeydown=anim;
+
+			
+
 
 	</script>
 
