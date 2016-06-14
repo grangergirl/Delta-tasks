@@ -284,10 +284,8 @@
 		else
 		flag3=0;
 	
-//scoreboard.innerHTML="Score: "+gTop;
-clearTimeout(timer);
-//if(flag==0)
-timer=setTimeout("eval()",40);	
+	clearTimeout(timer);
+	timer=setTimeout("eval()",30);	
 	}
 	function anim(e)
 	{
@@ -320,7 +318,7 @@ timer=setTimeout("eval()",40);
 		nightsky.style.animation="nightmove linear 9s infinite";		
 		aud.play();
 		}
-		if(e.keyCode==38)
+		if(e.keyCode==13)
 		{
 		if(jumpCount%2==0)
 		{
@@ -332,7 +330,7 @@ timer=setTimeout("eval()",40);
 		jumpCount++;
 		grandpa.style.animation="levitating 0.75s linear 1"; 
 		}
-		//aud.stop();	
+		
 		jump.play();
 		
 		count++;
@@ -358,8 +356,7 @@ timer=setTimeout("eval()",40);
 	<div>
 	<div id="header" style="color:red"><b>GRANDPA'S BANE</b></div>
 	<div id="game" style="display:inline-block">
-		
-		<div id="nightsky" style="display:inline-block">
+			<div id="nightsky" style="display:inline-block">
 			<div class="ball" id="ball1" style="display:inline-block" ></div>
 			<div class="ball" id="ball2" style="display:inline-block" ></div>
 			<div class="ball" id="ball3" style="display:inline-block" ></div>
@@ -373,7 +370,6 @@ timer=setTimeout("eval()",40);
 	</div>	
 	<div id="footer" style="color:yellow">Use enter key to help Grandpa jump (with low and high speeds alternatively) and any other key to help him walk. Take good care of Grandpa :)</div>
 	</div>
-	
 <script type="application/javascript" language="javascript">
 	var grandpa=document.getElementById("grandpa");
 	var nightsky=document.getElementById("nightsky");
@@ -389,11 +385,6 @@ timer=setTimeout("eval()",40);
 	var flag1=0,flag2=0,flag3=0;
 	var jumpCount=0;
 	document.onkeydown=anim;
-
-			
-
-
 	</script>
-
 </body>
 </html>
